@@ -54,7 +54,7 @@ public class EmployeeUser {
     public void setEmployeeAddress(String address){
         address = address.trim();
         boolean exists = !address.isBlank() ;     // constrain 1
-        boolean validLength = address.length()>4; // constrain 2
+        boolean validLength = address.length()>3; // constrain 2
         if(exists && validLength){
             this.employeeAddress = address;
         }else{ throw new IllegalArgumentException("Invalid address is entered");}}
