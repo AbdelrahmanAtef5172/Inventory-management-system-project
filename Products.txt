@@ -1,0 +1,6 @@
+P2394,Laptop,Apple,TechSupplier,10,1500.0
+P1002,Keyboard,HP,TechStore,30,400.0
+P1003,Monitor,Samsung,DisplayWorld,20,2200.0
+P1004,Printer,Canon,PrintCenter,15,1200.0
+P1005,Speaker,Sony,SoundHouse,25,800.0
+P9999,Tablet,Apple,TechSupplier,5,3000.0
