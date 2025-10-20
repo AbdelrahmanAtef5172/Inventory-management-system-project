@@ -58,9 +58,9 @@ public abstract class DataBase<T extends Common>{
 
     //METHOD TO REMOVE RECORD USING EMPLOYEE ID
     public void deleteRecord(String key) {
-        T employ = getRecord(key);
-        if (employ != null) {
-            this.records.remove(employ);}}
+        T record = getRecord(key);
+        if (record != null) {
+            this.records.remove(record);}}
 
     // METHOD TO WRITE IN THE FILE
     public void saveToFile() throws FileNotFoundException , IOException {

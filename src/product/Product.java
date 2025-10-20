@@ -17,9 +17,9 @@ public class Product extends Common {
         this.setPrice(price);
         this.setProductID(productID);
         this.setQuantity(quantity);
-        this.productName = productName;
-        this.manufacturerName = manufacturerName;
-        this.supplierName = supplierName;}
+        this.setProductName(productName);
+        this.setManufacturerName(manufacturerName);
+        this.setSupplierName(supplierName);}
 
     @Override
     //GETTER AND SETTER FOR THE EMPLOYEE ID
@@ -59,22 +59,28 @@ public class Product extends Common {
     public String getProductName() {
         return productName;}
     public void setProductName(String productName) {
-        this.productName = productName;}
+        if(!productName.isEmpty()){
+            this.productName = productName;
+        }else{throw new IllegalArgumentException("INVALID PRODUCT NAME IS ENTERED");}}
 
     //GETTER AND SETTER FOR MANUFACTURER NAME
     public String getManufacturerName() {
         return manufacturerName;}
     public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;}
+        if(!manufacturerName.isEmpty()){
+            this.manufacturerName= manufacturerName;
+        }else{throw new IllegalArgumentException("INVALID NAME IS ENTERED");}}
 
     //GETTER AND SETTER FOR THE SUPPLIER NAME
     public String getSupplierName() {
         return supplierName;}
     public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;}
+        if(!supplierName.isEmpty()){
+            this.supplierName =supplierName;
+        }else{throw new IllegalArgumentException("INVALID NAME IS ENTERED");}}
 
     @Override
     public String lineRepresentation() {
-        return  String.join(",",productID,productName,manufacturerName,supplierName,
-                                   String.valueOf(quantity), price+"\n");}
+        return String.join(",", productID, productName, manufacturerName, supplierName,
+                String.valueOf(quantity), String.valueOf(price)) + "\n";}
 }

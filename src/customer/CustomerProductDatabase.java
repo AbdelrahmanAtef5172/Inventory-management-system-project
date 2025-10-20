@@ -12,14 +12,14 @@ public class CustomerProductDatabase extends DataBase<CustomerProduct> {
     // IMPLEMENTATION OF ABSTRACT METHOD FROM DATABASE
     @Override
     public CustomerProduct createRecordFrom(String line) {
-        String[] dataCustomerProduct = line.split(",");
+        String[] dataCustomerProduct = line.trim().split(",");
         String customerSSN = dataCustomerProduct[0];
         String productID = dataCustomerProduct[1];
         String dateString = dataCustomerProduct[2];
         boolean paid = Boolean.parseBoolean(dataCustomerProduct[3]);
         //SPECIFYING THE PATTERN
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate purchaseDate = LocalDate.parse(dateString, date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate purchaseDate = LocalDate.parse(dateString, formatter);
         //CREATING NEW OBJECT
         CustomerProduct record = new CustomerProduct(customerSSN, productID, purchaseDate);
         record.setPaid(paid);
