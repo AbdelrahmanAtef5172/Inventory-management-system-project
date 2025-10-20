@@ -11,6 +11,8 @@ package employees;
 import java.io.*;
 import java.util.*;
 
+import abstracts.Recordable;
+
 public abstract class BaseDatabase {
     protected String file;
     protected ArrayList list;

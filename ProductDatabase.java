@@ -3,6 +3,8 @@ package employees;
 import java.io.*;
 import java.util.*;
 
+import abstracts.Recordable;
+
 public class ProductDatabase extends BaseDatabase {
 
     public ProductDatabase(String file) {

@@ -1,7 +1,9 @@
 package customer;
-
+import abstracts.Recordable;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 public class CustomerProduct implements Recordable {
     private String customerSSN;
@@ -32,12 +34,14 @@ public class CustomerProduct implements Recordable {
         this.paid = paid;
     }
 
-    public  lineRepresentation() {
-        return customerSSN + "," + productID + "," + purchaseDate.toString() + "," + paid.toString();
+    public  String lineRepresentation() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid.toString();
     }
 
-    public  getSearchKey() {
-        return customerSSN + "," + productID + "," + purchaseDate.toString();
+    public  String getSearchKey() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
     }
     
 }

@@ -1,5 +1,7 @@
 package employees;
 
+import abstracts.Recordable;
+
 public class EmployeeUser implements Recordable {
     private String id;
     private String name;

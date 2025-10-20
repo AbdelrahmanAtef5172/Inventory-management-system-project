@@ -1,5 +1,7 @@
 package employees;
 
+import abstracts.Recordable;
+
 public class Product implements Recordable {
     private String productID;
     private String productName;
