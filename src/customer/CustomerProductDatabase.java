@@ -2,9 +2,10 @@ package customer;
 
 import java.util.ArrayList;
 
-import abstracts.AbstractDatabase;
+import abstractClasses.DataBase;
 
-public class CustomerProductDatabase extends AbstractDatabase<CustomerProduct> {
+
+public class CustomerProductDatabase extends DataBase<CustomerProduct> {
     
     
 

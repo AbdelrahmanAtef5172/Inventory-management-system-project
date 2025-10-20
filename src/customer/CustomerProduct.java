@@ -1,11 +1,11 @@
 package customer;
-import abstracts.Recordable;
+import abstractClasses.Common;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class CustomerProduct implements Recordable {
+public class CustomerProduct extends Common {
     private String customerSSN;
     private String productID;
     private LocalDate purchaseDate;
