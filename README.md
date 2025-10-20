@@ -171,9 +171,10 @@ Data is saved in text files under the `/data` directory:
 ---
 
 ## 👨‍💻 Authors
-**Abdelrahman Atef**  
-**Galal Mohamed**
-**Ahmed Hossam**
+- **Abdelrahman Atef**  
+- **Galal Mohamed**
+- **Ahmed Hossam**
+___
 Programming II – Lab 4  
 Fall 2025 / 2026  
 Alexandria University – Faculty of Engineering  
