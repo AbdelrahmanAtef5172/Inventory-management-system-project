@@ -21,6 +21,15 @@ public class Product extends Common {
         this.setManufacturerName(manufacturerName);
         this.setSupplierName(supplierName);}
 
+    //CLASS CONSTRUCTOR USING SETTER FOR CONSTRAINS AND VALIDATION
+    public Product(String productID, String productName, String manufacturerName,
+                   String supplierName, int quantity){
+        this.setProductID(productID);
+        this.setQuantity(quantity);
+        this.setProductName(productName);
+        this.setManufacturerName(manufacturerName);
+        this.setSupplierName(supplierName);}
+
     @Override
     //GETTER AND SETTER FOR THE EMPLOYEE ID
     public String getSearchKey(){

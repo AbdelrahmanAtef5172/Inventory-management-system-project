@@ -2,6 +2,11 @@ package employees;
 
 import product.Product;
 import product.ProductDataBase;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 import customer.CustomerProduct;
 import customer.CustomerProductDatabase;
 
@@ -11,18 +16,17 @@ public class EmployeeRole {
     private CustomerProductDatabase customerProductDatabase;
 
     public EmployeeRole() {
-        productsDatabase = new ProductDatabase("Products.txt");
+        productsDatabase = new ProductDataBase("Products.txt");
         customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName,
-            String supplierName, int quantity) {
-        Product newProduct = new Product(productID, productName, manufacturerName,
-                supplierName, quantity);
+    public void addProduct(String productID, String productName, String manufacturerName,String supplierName, int quantity) {
+        Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity);
         productsDatabase.insertRecord(newProduct);
     }
 
     public Product[] getListOfProducts() {
+        //cast array list to array and return
         return productsDatabase.returnAllRecords().toArray(new Product[0]);
     }
 
@@ -36,9 +40,9 @@ public class EmployeeRole {
             return false;
         }
 
-        // Decrease quantity and update product
+        // Decrease quantity and insert product
         product.setQuantity(product.getQuantity() - 1);
-        productsDatabase.updateRecord(product);
+        productsDatabase.insertRecord(product);
 
         // Create new purchase record
         CustomerProduct purchase = new CustomerProduct(customerSSN, productID, purchaseDate);
@@ -58,8 +62,8 @@ public class EmployeeRole {
         if (product == null) {
             return -1;
         }
-
-        String searchKey = customerSSN + "," + productID + "," + purchaseDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String searchKey = customerSSN + "," + productID + "," + purchaseDate.format(formatter);
         CustomerProduct purchase = customerProductDatabase.getRecord(searchKey);
         if (purchase == null) {
             return -1;
@@ -72,20 +76,27 @@ public class EmployeeRole {
 
         // Process return
         product.setQuantity(product.getQuantity() + 1);
-        productsDatabase.updateRecord(product);
         customerProductDatabase.deleteRecord(searchKey);
+        productsDatabase.deleteRecord(searchKey);
+        productsDatabase.insertRecord(product);
+        try {
+            productsDatabase.saveToFile();
+            customerProductDatabase.saveToFile();
+        } catch (Exception e) {
+            System.err.println("File not found: " + e.getMessage());
+        }
 
         return product.getPrice();
     }
 
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
         CustomerProduct[] purchases = getListOfPurchasingOperations();
-        for (CustomerProduct purchase : purchases) {
-            if (purchase.getCustomerSSN().equals(customerSSN) &&
-                    purchase.getPurchaseDate().equals(purchaseDate)) {
+        for (CustomerProduct purchase : purchases) {//easier to read
+            if (purchase.getCustomerSSN().equals(customerSSN) && purchase.getPurchaseDate().equals(purchaseDate)) {
                 if (!purchase.isPaid()) {
                     purchase.setPaid(true);
-                    customerProductDatabase.updateRecord(purchase);
+                    customerProductDatabase.deleteRecord(purchase.getSearchKey());
+                    customerProductDatabase.insertRecord(purchase);
                     return true;
                 }
                 break;
@@ -95,8 +106,12 @@ public class EmployeeRole {
     }
 
     public void logout() {
-        productsDatabase.saveToFile();
-        customerProductDatabase.saveToFile();
+        try {
+            productsDatabase.saveToFile();
+            customerProductDatabase.saveToFile();
+        } catch (Exception e) {
+            System.err.println("Error saving to file: " + e.getMessage());
+        }
     }
 
 }
