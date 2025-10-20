@@ -9,15 +9,15 @@ public class AdminRole {
     private EmployeeUserDatabase db;
 
     //CLASS CONSTRUCTOR
-    public AdminRole() throws FileNotFoundException{
+    public AdminRole() throws FileNotFoundException {
         this.db = new EmployeeUserDatabase("data/employees.txt");
         db.readFromFile();}
 
     //METHOD THAT ADD NEW EMPLOYEE TO THE FILE
-    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber)
-            throws FileNotFoundException , IOException{
+    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber){
         EmployeeUser employ = new EmployeeUser(employeeId, name, email, address, phoneNumber);
-        db.insertRecord(employ);}
+        if(!db.contains(employeeId)){
+            db.insertRecord(employ);}}
 
     //METHOD TO RETURN ALL EMPLOYEES IN ARRAY FORM
     public EmployeeUser[] getListOfEmployees(){
@@ -27,7 +27,6 @@ public class AdminRole {
 
     //METHOD TO REMOVE EMPLOYEE  IN THE FILE
     public void removeEmployee(String key){
-        ArrayList<EmployeeUser> employees = db.returnAllRecords();
         EmployeeUser employee = db.getRecord(key);
         if(employee!=null){
             db.deleteRecord(key);}}
