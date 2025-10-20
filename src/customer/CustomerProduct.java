@@ -1,7 +1,8 @@
 package customer;
-import abstractClasses.Common;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import abstractClasses.Common;
 
 
 public class CustomerProduct extends Common {
