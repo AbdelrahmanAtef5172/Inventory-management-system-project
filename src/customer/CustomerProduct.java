@@ -1,6 +1,5 @@
 package customer;
 import abstractClasses.Common;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -36,7 +35,7 @@ public class CustomerProduct extends Common {
 
     public  String lineRepresentation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid.toString();
+        return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid+ "\n";
     }
 
     public  String getSearchKey() {
