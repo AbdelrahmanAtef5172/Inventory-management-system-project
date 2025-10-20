@@ -1,5 +1,7 @@
 package employees;
-public class EmployeeUser {
+import abstractClasses.Common;
+
+public class EmployeeUser extends Common {
 
     //CLASS ATTRIBUTES
     private String employeeId ;
@@ -57,7 +59,7 @@ public class EmployeeUser {
         boolean validLength = address.length()>3; // constrain 2
         if(exists && validLength){
             this.employeeAddress = address;
-        }else{ throw new IllegalArgumentException("Invalid address is entered");}}
+        }else{ throw new IllegalArgumentException("INVALID ADDRESS IS ENTERED");}}
 
 
     //GETTER AND SETTER FOR THE EMPLOYEE PHONE NUMBER
@@ -79,7 +81,7 @@ public class EmployeeUser {
             this.employeePhoneNumber = phoneNumber;
         }else{ throw new IllegalArgumentException("INVALID PHONE NUMBER IS ENTERED ");}}
 
-
+     @Override
     //GETTER AND SETTER FOR THE EMPLOYEE ID
     public String getSearchKey(){
         return this.employeeId;}
@@ -97,7 +99,7 @@ public class EmployeeUser {
             this.employeeId =  id;
         }else{ throw new IllegalArgumentException("INVALID ID IS ENTERED ");}}
 
-
+    @Override
     //METHOD TO RETURN THE EMPLOYEE DATA IN STRING LINE REPRESENTATION
     public String lineRepresentation(){
         return String.join(",",this.employeeId , this.employeeName ,
