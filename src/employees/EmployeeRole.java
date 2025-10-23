@@ -9,15 +9,21 @@ import java.time.temporal.ChronoUnit;
 
 import customer.CustomerProduct;
 import customer.CustomerProductDatabase;
+import employees.EmployeeUser;
+import java.io.FileNotFoundException;
 
 public class EmployeeRole {
 
     private ProductDataBase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
 
-    public EmployeeRole() {
-        productsDatabase = new ProductDataBase("Products.txt");
-        customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
+    public EmployeeRole() throws FileNotFoundException {
+        productsDatabase = new ProductDataBase("data/Products.txt");
+        productsDatabase.readFromFile();
+
+        customerProductDatabase = new CustomerProductDatabase("data/CustomersProducts.txt");
+        customerProductDatabase.readFromFile();
+
     }
 
     public void addProduct(String productID, String productName, String manufacturerName,String supplierName, int quantity) {
@@ -25,13 +31,13 @@ public class EmployeeRole {
         productsDatabase.insertRecord(newProduct);
     }
 
-    public Product[] getListOfProducts() {
+    public Product[] getListOfProducts() throws FileNotFoundException {
         //cast array list to array and return
-        return productsDatabase.returnAllRecords().toArray(new Product[0]);
+        return productsDatabase.returnAllRecords().toArray(Product[]::new);
     }
 
-    public CustomerProduct[] getListOfPurchasingOperations() {
-        return customerProductDatabase.returnAllRecords().toArray(new CustomerProduct[0]);
+    public CustomerProduct[] getListOfPurchasingOperations() throws FileNotFoundException {
+        return customerProductDatabase.returnAllRecords().toArray(CustomerProduct[]::new);
     }
 
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
@@ -52,7 +58,7 @@ public class EmployeeRole {
     }
 
     public double returnProduct(String customerSSN, String productID,
-            LocalDate purchaseDate, LocalDate returnDate) {
+                                LocalDate purchaseDate, LocalDate returnDate) {
         // Validate return conditions
         if (returnDate.isBefore(purchaseDate)) {
             return -1;
@@ -89,7 +95,7 @@ public class EmployeeRole {
         return product.getPrice();
     }
 
-    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
+    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) throws FileNotFoundException {
         CustomerProduct[] purchases = getListOfPurchasingOperations();
         for (CustomerProduct purchase : purchases) {//easier to read
             if (purchase.getCustomerSSN().equals(customerSSN) && purchase.getPurchaseDate().equals(purchaseDate)) {
