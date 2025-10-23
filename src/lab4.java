@@ -1,11 +1,3 @@
-import customer.CustomerProduct;
-import customer.CustomerProductDatabase;
-import employees.EmployeeUser;
-import employees.EmployeeUserDatabase;
-import employees.AdminRole;
-import product.Product;
-import product.ProductDataBase;
-
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
